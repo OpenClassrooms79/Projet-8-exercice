@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class VoituresController extends AbstractController
 {
+    /*
+     * page d'accueil : Liste des voitures
+     */
     #[Route('/', name: 'app_home')]
     public function index(VoitureRepository $voitureRepository): Response
     {
