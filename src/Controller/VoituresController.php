@@ -19,4 +19,21 @@ class VoituresController extends AbstractController
             'voitures' => $voitureRepository->findAll(),
         ]);
     }
+
+    /*
+     * page de détail d'une voiture
+     */
+    #[Route('/voiture/{id}', name: 'app_detail')]
+    public function detail(VoitureRepository $voitureRepository, int $id): Response
+    {
+        $voiture = $voitureRepository->find($id);
+
+        if ($voiture === null) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('detail.html.twig', [
+            'voiture' => $voiture,
+        ]);
+    }
 }
