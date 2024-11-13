@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\VoitureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints;
 
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
@@ -27,10 +28,12 @@ class Voiture
     private ?float $dailyPrice = null;
 
     #[ORM\Column]
+    #[Constraints\NotBlank]
+    #[Constraints\Range(min: 1, max: 9)]
     private ?int $places = null;
 
     #[ORM\Column]
-    private ?bool $isAutomatic = null;
+    private ?bool $automatic = null;
 
     public function getId(): ?int
     {
@@ -99,12 +102,12 @@ class Voiture
 
     public function isAutomatic(): ?bool
     {
-        return $this->isAutomatic;
+        return $this->automatic;
     }
 
-    public function setAutomatic(bool $isAutomatic): static
+    public function setAutomatic(bool $automatic): static
     {
-        $this->isAutomatic = $isAutomatic;
+        $this->automatic = $automatic;
 
         return $this;
     }
